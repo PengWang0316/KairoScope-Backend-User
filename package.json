@@ -1,7 +1,7 @@
 {
-  "name": "reading-service",
+  "name": "user-service",
   "version": "1.0.0",
-  "description": "The microservice for KairoScope. This is the service that is in charge of reading's operations.",
+  "description": "The microservice for KairoScope. This is the service that is in charge of user's operations.",
   "main": "index.js",
   "scripts": {
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
