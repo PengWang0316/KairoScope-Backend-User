@@ -41,7 +41,9 @@ describe('fetch-hexagrams', () => {
     expect(mockCollection).toHaveBeenLastCalledWith(process.env.userCollectionName);
     expect(mockFind).toHaveBeenCalledTimes(1);
     expect(mockFind).toHaveBeenLastCalledWith({}, {
-      displayName: 1, photo: 1, role: 1, 'settings.customName': 1,
+      projection: {
+        displayName: 1, photo: 1, role: 1, 'settings.customName': 1,
+      },
     });
     expect(mockSkip).toHaveBeenCalledTimes(1);
     expect(mockSkip).toHaveBeenLastCalledWith(event.queryStringParameters.pageNumber * event.queryStringParameters.numberPerpage);
