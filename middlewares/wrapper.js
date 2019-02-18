@@ -41,5 +41,5 @@ module.exports = func => middy(func)
   }))
   .use(mongoSanitize)
   .use(doNotWaitForEmptyEventLoop())
-  .use(initializeMongoDB)
-  .use(verifyJWT);
+  .use(initializeMongoDB);
+  // .use(verifyJWT);
