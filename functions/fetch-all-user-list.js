@@ -10,7 +10,7 @@ const handler = async (event, context) => {
   const { pageNumber, numberPerpage } = event.queryStringParameters;
   try {
     const result = await cloudwatch.trackExecTime('MongoDBFindLatancy', () => promiseFindResult(db => db
-      .collection().find({}, {
+      .collection(process.env.userCollectionName).find({}, {
         displayName: 1, photo: 1, role: 1, 'settings.customName': 1,
       }).skip(pageNumber * numberPerpage).limit(numberPerpage * 1)));
 
