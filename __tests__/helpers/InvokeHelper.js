@@ -69,12 +69,13 @@ const viaHandler = (handlerName, event = {}, context = {}) => {
   });
 };
 
-// const invokeGetRestaurants = () => testMode === 'integration'
-//   ? viaHandler('get-restaurants') : viaHttp('restaurants', 'get', { iam: true });
+const invokeFetchAllUserList = (event, context) => isIntegrationTest
+  ? viaHandler('fetch-all-user-list', event, context) : viaHttp(`users/list?pageNumber=${event.queryStringParameters.pageNumber}&numberPerpage=${event.queryStringParameters.numberPerpage}`);
 
 // const invokeSearchRestaurants = (theme, authHeader) => testMode === 'integration'
 //   ? viaHandler('search-restaurants', { body: JSON.stringify({ theme }), authHeader })
 //   : viaHttp('restaurants/search', 'post', { iam: false, body: { theme }, authHeader });
 
 module.exports = {
+  invokeFetchAllUserList,
 };
