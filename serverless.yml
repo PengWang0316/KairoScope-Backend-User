@@ -81,7 +81,7 @@ functions:
     layers:
       - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
 
-  fetch-all-user-list:
+  fetch-users-amount:
     handler: functions/fetch-users-amount.handler
     events:
       - http:
