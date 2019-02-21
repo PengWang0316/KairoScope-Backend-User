@@ -75,6 +75,9 @@ const invokeFetchAllUserList = (event, context) => isIntegrationTest
 const invokeFetchUsersAmount = (event, context) => isIntegrationTest
   ? viaHandler('fetch-users-amount', event, context) : viaHttp('users/amount');
 
+const invokeIsUserNameAvailable = (event, context) => isIntegrationTest
+  ? viaHandler('is-user-name-available', event, context) : viaHttp(`users/available?userName=${event.queryStringParameters.userName}`);
+
 // const invokeSearchRestaurants = (theme, authHeader) => testMode === 'integration'
 //   ? viaHandler('search-restaurants', { body: JSON.stringify({ theme }), authHeader })
 //   : viaHttp('restaurants/search', 'post', { iam: false, body: { theme }, authHeader });
@@ -82,4 +85,5 @@ const invokeFetchUsersAmount = (event, context) => isIntegrationTest
 module.exports = {
   invokeFetchAllUserList,
   invokeFetchUsersAmount,
+  invokeIsUserNameAvailable,
 };
