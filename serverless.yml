@@ -89,6 +89,18 @@ functions:
           method: get
           cors: true
     environment:
-      async_metrics: true # Use this variable to control whether send the metrics to CloudWatch Async
+      async_metrics: true
+    layers:
+      - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
+
+  is-user-name-available:
+    handler: functions/is-user-name-available.handler
+    events:
+      - http:
+          path: /users/available
+          method: get
+          cors: true
+    environment:
+      async_metrics: true
     layers:
       - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
