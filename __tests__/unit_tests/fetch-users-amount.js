@@ -1,6 +1,7 @@
 import mongodbHelper from '@kevinwang0316/mongodb-helper';
 import cloudwatch from '@kevinwang0316/cloudwatch';
 import log from '@kevinwang0316/log';
+
 import { handler } from '../../functions/fetch-users-amount';
 
 require('../helpers/initailEnvsForUnitTest');
@@ -16,7 +17,7 @@ jest.mock('@kevinwang0316/mongodb-helper', () => ({
 jest.mock('@kevinwang0316/log', () => ({ error: jest.fn() }));
 jest.mock('@kevinwang0316/cloudwatch', () => ({ trackExecTime: jest.fn().mockImplementation((name, func) => func()) }));
 
-describe('fetch-hexagrams', () => {
+describe('fetch-users-amount', () => {
   beforeEach(() => {
     mockCollection.mockClear();
     mockCount.mockClear();
