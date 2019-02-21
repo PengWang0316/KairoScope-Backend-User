@@ -14,7 +14,7 @@ describe('fetch-users-amount: invoke the Get / endpoint', () => {
     };
   });
 
-  test('invoke fetch-hexagrams function', async () => {
+  test('invoke fetch-users-amount function', async () => {
     const event = {};
     const res = await invokeFetchUsersAmount(event, context);
     expect(res.statusCode).toBe(200);

@@ -14,7 +14,7 @@ describe('fetch-all-user-list: invoke the Get / endpoint', () => {
     };
   });
 
-  test('invoke fetch-hexagrams function', async () => {
+  test('invoke fetch-all-user-list function', async () => {
     const event = { queryStringParameters: { pageNumber: '1', numberPerpage: '10' } };
     const res = await invokeFetchAllUserList(event, context);
     expect(res.statusCode).toBe(200);
