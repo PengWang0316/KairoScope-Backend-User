@@ -3,7 +3,7 @@ import initEvns from '../helpers/InitialEnvs';
 
 let context;
 
-describe('fetch-all-user-list: invoke the Get / endpoint', () => {
+describe('fetch-users-amount: invoke the Get / endpoint', () => {
   beforeAll(async () => {
     jest.setTimeout(10000); // Setup a longer timeout to allow fetching the credantial keys from SSM.
     await initEvns();
