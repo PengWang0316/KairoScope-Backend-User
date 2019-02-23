@@ -46,9 +46,10 @@ describe('fetch-users-amount', () => {
     const context = { functionName: 'functionName' };
     cloudwatch.trackExecTime.mockRejectedValueOnce('Error Message');
 
-    await handler(event, context);
+    const result = await handler(event, context);
 
     expect(cloudwatch.trackExecTime).toHaveBeenCalledTimes(1);
+    expect(result).toEqual({ statusCode: 500 });
     expect(log.error).toHaveBeenCalledTimes(1);
     expect(log.error).toHaveBeenLastCalledWith(`${context.functionName} function has error message: Error Message`);
   });
