@@ -7,9 +7,12 @@ const updateUser = require('./libs/update-user');
 const wapper = require('../middlewares/wrapper');
 
 const handler = async (event, context) => {
-  const { user } = JSON.parse(event.body);
+  let { customName } = JSON.parse(event.body);
+  customName = customName.length > 20
+    ? customName.slice(0, 20)
+    : customName;
   try {
-    const result = await updateUser(context.user._id, user);
+    const result = await updateUser(context.user._id, { 'settings.customName': customName });
     return { statusCode: 200, body: JSON.stringify(result) };
   } catch (error) {
     log.error(`${context.functionName} function has error message: ${error}`);

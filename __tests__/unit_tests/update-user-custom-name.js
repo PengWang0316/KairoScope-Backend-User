@@ -15,20 +15,33 @@ describe('update-user-custom-name', () => {
     log.error.mockClear();
   });
 
-  test('calling updateUser without error', async () => {
-    const event = { body: JSON.stringify({ user: { username: 'username' } }) };
+  test('calling updateUser without error name less than 20', async () => {
+    const event = { body: JSON.stringify({ customName: 'customName' }) };
     const context = { functionName: 'functionName', user: { _id: 'userId' } };
 
     const result = await handler(event, context);
 
     expect(updateUser).toHaveBeenCalledTimes(1);
-    expect(updateUser).toHaveBeenLastCalledWith(context.user._id, JSON.parse(event.body).user);
+    expect(updateUser).toHaveBeenLastCalledWith(context.user._id, { 'settings.customName': 'customName' });
+    expect(result).toEqual({ statusCode: 200, body: JSON.stringify(true) });
+    expect(log.error).not.toHaveBeenCalled();
+  });
+
+  test('calling updateUser without error name greater than 20', async () => {
+    const customName = 'customNameooooooooooooooooooooooooo';
+    const event = { body: JSON.stringify({ customName }) };
+    const context = { functionName: 'functionName', user: { _id: 'userId' } };
+
+    const result = await handler(event, context);
+
+    expect(updateUser).toHaveBeenCalledTimes(1);
+    expect(updateUser).toHaveBeenLastCalledWith(context.user._id, { 'settings.customName': customName.slice(0, 20) });
     expect(result).toEqual({ statusCode: 200, body: JSON.stringify(true) });
     expect(log.error).not.toHaveBeenCalled();
   });
 
   test('calling updateUser with updateUser function error', async () => {
-    const event = { body: JSON.stringify({ user: { username: 'username' } }) };
+    const event = { body: JSON.stringify({ customName: 'customName' }) };
     const context = { functionName: 'functionName', user: { _id: 'userId' } };
 
     updateUser.mockReturnValueOnce(Promise.reject(('Error Message')));
@@ -36,7 +49,7 @@ describe('update-user-custom-name', () => {
     const result = await handler(event, context);
 
     expect(updateUser).toHaveBeenCalledTimes(1);
-    expect(updateUser).toHaveBeenLastCalledWith(context.user._id, JSON.parse(event.body).user);
+    expect(updateUser).toHaveBeenLastCalledWith(context.user._id, { 'settings.customName': 'customName' });
     expect(result).toEqual({ statusCode: 500 });
     expect(log.error).toHaveBeenCalledTimes(1);
     expect(log.error).toHaveBeenLastCalledWith(`${context.functionName} function has error message: Error Message`);
