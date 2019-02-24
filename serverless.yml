@@ -104,3 +104,15 @@ functions:
       async_metrics: true
     layers:
       - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
+
+  update-user-custom-name:
+    handler: functions/update-user-custom-name.handler
+    events:
+      - http:
+          path: /users/customName
+          method: post
+          cors: true
+    environment:
+      async_metrics: true
+    layers:
+      - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
