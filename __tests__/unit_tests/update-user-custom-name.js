@@ -7,7 +7,7 @@ require('../helpers/initailEnvsForUnitTest');
 
 jest.mock('../../middlewares/wrapper', () => functionHandler => ({ use: jest.fn().mockReturnValue(functionHandler) }));
 jest.mock('@kevinwang0316/log', () => ({ error: jest.fn() }));
-jest.mock('../../functions/libs/update-user', () => jest.fn().mockReturnValue(true));
+jest.mock('../../functions/libs/update-user', () => jest.fn().mockReturnValue({ value: 'value' }));
 
 describe('update-user-custom-name', () => {
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe('update-user-custom-name', () => {
 
     expect(updateUser).toHaveBeenCalledTimes(1);
     expect(updateUser).toHaveBeenLastCalledWith(context.user._id, { 'settings.customName': 'customName' });
-    expect(result).toEqual({ statusCode: 200, body: JSON.stringify(true) });
+    expect(result).toEqual({ statusCode: 200, body: JSON.stringify('value') });
     expect(log.error).not.toHaveBeenCalled();
   });
 
@@ -36,7 +36,7 @@ describe('update-user-custom-name', () => {
 
     expect(updateUser).toHaveBeenCalledTimes(1);
     expect(updateUser).toHaveBeenLastCalledWith(context.user._id, { 'settings.customName': customName.slice(0, 20) });
-    expect(result).toEqual({ statusCode: 200, body: JSON.stringify(true) });
+    expect(result).toEqual({ statusCode: 200, body: JSON.stringify('value') });
     expect(log.error).not.toHaveBeenCalled();
   });
 

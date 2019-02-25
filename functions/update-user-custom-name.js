@@ -13,7 +13,7 @@ const handler = async (event, context) => {
     : customName;
   try {
     const result = await updateUser(context.user._id, { 'settings.customName': customName });
-    return { statusCode: 200, body: JSON.stringify(result) };
+    return { statusCode: 200, body: JSON.stringify(result.value) };
   } catch (error) {
     log.error(`${context.functionName} function has error message: ${error}`);
     return { statusCode: 500 };
