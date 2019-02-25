@@ -110,7 +110,7 @@ functions:
     events:
       - http:
           path: /users/customName
-          method: post
+          method: put
           cors: true
     environment:
       async_metrics: true
