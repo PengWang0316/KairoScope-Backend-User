@@ -12,8 +12,9 @@ const handler = async (event, context) => {
     ? customName.slice(0, 20)
     : customName;
   try {
-    const result = await updateUser(context.user._id, { 'settings.customName': customName });
-    return { statusCode: 200, body: JSON.stringify(result.value) };
+    const { value } = await updateUser(context.user._id, { 'settings.customName': customName });
+    value.isAuth = true;
+    return { statusCode: 200, body: JSON.stringify(value) };
   } catch (error) {
     log.error(`${context.functionName} function has error message: ${error}`);
     return { statusCode: 500 };

@@ -32,7 +32,7 @@ describe('update-user-custom-name: invoke the Get / endpoint', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body).not.toBeUndefined();
     expect(res.body).not.toBeNull();
-    expect(res.body).toEqual({ _id: FAKE_USER_ID, settings: { customName: 'customTestName' } });
+    expect(res.body).toEqual({ _id: FAKE_USER_ID, settings: { customName: 'customTestName' }, isAuth: true });
 
     user = await promiseNextResult(db => db.collection(process.env.userCollectionName).find({ _id: new ObjectId(FAKE_USER_ID) }));
     const newCustomName = user.settings.customName;
