@@ -79,7 +79,10 @@ const invokeIsUserNameAvailable = (event, context) => isIntegrationTest
   ? viaHandler('is-user-name-available', event, context) : viaHttp(`users/available?userName=${event.queryStringParameters.userName}`);
 
 const invokeUpdateUserCustomName = (event, context) => isIntegrationTest
-  ? viaHandler('update-user-custom-name', event, context) : viaHttp('users/customName', { iam: false, body: JSON.parse(event.body) }, 'post');
+  ? viaHandler('update-user-custom-name', event, context) : viaHttp('users/customName', { iam: false, body: JSON.parse(event.body) }, 'put');
+
+const invokeUpdateUserGroup = (event, context) => isIntegrationTest
+  ? viaHandler('update-user-group', event, context) : viaHttp('users/group', { iam: false, body: JSON.parse(event.body) }, 'put');
 
 // const invokeSearchRestaurants = (theme, authHeader) => testMode === 'integration'
 //   ? viaHandler('search-restaurants', { body: JSON.stringify({ theme }), authHeader })
@@ -90,4 +93,5 @@ module.exports = {
   invokeFetchUsersAmount,
   invokeIsUserNameAvailable,
   invokeUpdateUserCustomName,
+  invokeUpdateUserGroup,
 };
