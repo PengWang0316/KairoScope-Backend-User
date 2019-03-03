@@ -116,3 +116,15 @@ functions:
       async_metrics: true
     layers:
       - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
+
+  update-user-group:
+    handler: functions/update-user-group.handler
+    events:
+      - http:
+          path: /users/group
+          method: put
+          cors: true
+    environment:
+      async_metrics: true
+    layers:
+      - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
