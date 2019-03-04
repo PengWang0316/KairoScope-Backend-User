@@ -128,3 +128,16 @@ functions:
       async_metrics: true
     layers:
       - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
+
+  delete-user-group:
+    handler: functions/delete-user-group.handler
+    events:
+      - http:
+          path: /users/group
+          method: delete
+          cors: true
+    environment:
+      async_metrics: true
+    layers:
+      - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
+  
