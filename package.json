@@ -33,7 +33,7 @@
     "@kevinwang0316/log": "^1.0.1",
     "@kevinwang0316/mongodb-helper": "^1.0.2",
     "@puresec/function-shield": "^1.2.3",
-    "aws-sdk": "^2.388.0",
+    "aws-sdk": "^2.814.0",
     "aws-xray-sdk": "^2.1.0",
     "aws4": "^1.8.0",
     "awscred": "^1.4.2",
